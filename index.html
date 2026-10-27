@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Invitation for Saiii 💕</title>
+  <meta name="description" content="A cute, romantic interactive date invitation for Saiii.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Hearts Background Canvas -->
+  <canvas id="heartCanvas"></canvas>
+
+  <!-- Background Glowing Orbs -->
+  <div class="bg-glow orb-1"></div>
+  <div class="bg-glow orb-2"></div>
+  <div class="bg-glow orb-3"></div>
+
+  <!-- Music / Sound FX Toggle (Romantic Aesthetic) -->
+  <header class="app-header">
+    <div class="music-pill" id="bgMusicToggle" title="Toggle romantic background melody">
+      <span class="music-icon">🎵</span>
+      <span class="music-label">Romantic Melodies</span>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- MODULE / STEP 1: The Proposal Question -->
+    <section class="card step-card active" id="step1" aria-labelledby="step1Heading">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="badge-tag">💌 Just For You</div>
+
+        <div class="avatar-wrapper">
+          <div class="heart-pulse-ring"></div>
+          <div class="beating-heart-art">💖</div>
+        </div>
+
+        <h1 id="step1Heading" class="romantic-title">
+          Hi <span class="highlight-name">saiii</span>,
+        </h1>
+        <p class="romantic-question">
+          I want to meet you... <br>
+          <span class="question-emphasis">Are you okay to go on a date with me? 🥺👉👈</span>
+        </p>
+
+        <div class="button-group" id="step1Buttons">
+          <button type="button" id="btnYes" class="btn btn-primary" aria-label="Yes, I would love to!">
+            <span class="btn-text">Yes, of course! 🥰</span>
+            <span class="btn-sparkle">✨</span>
+          </button>
+          <button type="button" id="btnNo" class="btn btn-secondary" aria-label="No">
+            <span class="btn-text">No 🙈</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE / STEP 2: The Date & Time Selector (Calendar) -->
+    <section class="card step-card" id="step2" aria-labelledby="step2Heading">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="step-indicator">
+          <span class="step-badge">Step 2 of 4</span>
+          <span class="step-title-small">Pick Our Date & Time 📅</span>
+        </div>
+
+        <h2 id="step2Heading" class="step-title">When are you free, Saiii? ✨</h2>
+        <p class="step-subtitle">
+          I've kept these days especially reserved for us! Choose a date:
+        </p>
+
+        <!-- Calendar Container -->
+        <div class="calendar-wrapper">
+          <div class="calendar-header">
+            <span class="calendar-month">October 2026 💕</span>
+            <span class="calendar-legend-note">Only 3 golden days available!</span>
+          </div>
+
+          <div class="calendar-weekdays">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+
+          <div class="calendar-days-grid" id="calendarGrid">
+            <!-- Dynamically populated via app.js -->
+          </div>
+        </div>
+
+        <!-- Selected Date Alert Banner -->
+        <div class="selected-day-banner" id="selectedDayBanner">
+          <span class="banner-icon">📌</span>
+          <span id="selectedDayText">Please pick one of our available days above!</span>
+        </div>
+
+        <!-- Time Slots Selection (revealed when a date is picked) -->
+        <div class="time-selection-section" id="timeSection" style="display: none;">
+          <h3 class="time-section-title">What time shall we meet? ⏰</h3>
+          
+          <div class="time-slots-container" id="timeSlotsContainer">
+            <!-- Time pills injected dynamically -->
+          </div>
+
+          <!-- Custom Time Selector Fallback -->
+          <div class="custom-time-box">
+            <label for="customTimeInput">Or pick a specific time:</label>
+            <div class="custom-time-row">
+              <input type="time" id="customTimeInput" class="custom-time-input">
+              <button type="button" id="btnConfirmCustomTime" class="btn btn-small">Confirm Time</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav-buttons">
+          <button type="button" class="btn btn-outline" id="btnBackToStep1">← Back</button>
+          <button type="button" class="btn btn-primary" id="btnToStep3" disabled>
+            Next: Date Ideas 💕 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE / STEP 3: Where Shall We Meet -->
+    <section class="card step-card" id="step3" aria-labelledby="step3Heading">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="step-indicator">
+          <span class="step-badge">Step 3 of 4</span>
+          <span class="step-title-small">Where Shall We Meet? 📍</span>
+        </div>
+
+        <h2 id="step3Heading" class="step-title">Where shall we meet, Saiii? 💕</h2>
+        <p class="step-subtitle">Tell me your favorite place or where you want us to go:</p>
+
+        <!-- Meeting Location Input -->
+        <div class="preference-group">
+          <label for="meetingLocation" class="preference-label">📍 Where we meet:</label>
+          <input type="text" id="meetingLocation" class="romantic-input" placeholder="e.g. Our favorite cafe,theater etc.">
+          
+          <!-- Cute Quick Suggestion Chips -->
+          <div class="quick-location-chips" id="quickLocationChips">
+            <span class="chip-hint">Quick ideas:</span>
+            <button type="button" class="loc-chip" data-loc="Cozy Coffee Shop ☕">Cozy Cafe ☕</button>
+            <button type="button" class="loc-chip" data-loc="Sunset Beach Walk 🌅">Beach 🌅</button>
+            <button type="button" class="loc-chip" data-loc="Romantic Candlelight Restaurant 🍝">Restaurant 🍝</button>
+            <button type="button" class="loc-chip" data-loc="Peaceful Park & Stroll 🌳">Park 🌳</button>
+          </div>
+        </div>
+
+        <!-- Sweet Message Input -->
+        <div class="preference-group">
+          <label for="sweetNote" class="preference-label">💌 Any sweet note for me (optional):</label>
+          <textarea id="sweetNote" class="sweet-textarea" rows="2" placeholder="e.g. Wear your prettiest dress! Can't wait to see your smile..."></textarea>
+        </div>
+
+        <div class="step-nav-buttons">
+          <button type="button" class="btn btn-outline" id="btnBackToStep2">← Change Date</button>
+          <button type="button" class="btn btn-primary" id="btnToStep4">
+            Lock In Our Date! 🎟️💖
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE / STEP 4: The Official Date Confirmation Pass -->
+    <section class="card step-card" id="step4" aria-labelledby="step4Heading">
+      <div class="card-glow"></div>
+      <div class="card-content">
+        <div class="celebration-badge">🎉 YAAAAY! IT'S A DATE! 🎉</div>
+        <h2 id="step4Heading" class="step-title">I'm so excited to see you, Saiii! 💖</h2>
+        <p class="step-subtitle">Here is our official Date Boarding Pass. Screenshot or save it!</p>
+
+        <!-- Boarding Pass / Date Ticket -->
+        <div class="date-ticket" id="dateTicket">
+          <div class="ticket-header">
+            <div class="ticket-logo">✨ SPECIAL DATE PASS ✨</div>
+            <div class="ticket-status">CONFIRMED ❤️</div>
+          </div>
+          
+          <div class="ticket-body">
+            <div class="ticket-route">
+              <div class="route-point">
+                <span class="route-city">YOU</span>
+                <span class="route-desc">Saiii</span>
+              </div>
+              <div class="route-flight">
+                <span class="heart-line">───── ✈️ 💖 ─────</span>
+                <span class="flight-type">Non-Stop Romance</span>
+              </div>
+              <div class="route-point">
+                <span class="route-city">ME</span>
+                <span class="route-desc">Your Girl 💕</span>
+              </div>
+            </div>
+
+            <div class="ticket-details-grid">
+              <div class="detail-item">
+                <span class="detail-label">DATE</span>
+                <span class="detail-val" id="ticketDate">Oct 28, 2026</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">TIME</span>
+                <span class="detail-val" id="ticketTime">5:00 PM</span>
+              </div>
+              <div class="detail-item detail-full">
+                <span class="detail-label">WHERE WE MEET 📍</span>
+                <span class="detail-val" id="ticketLocation">Our Special Spot 💕</span>
+              </div>
+            </div>
+
+            <div class="ticket-note-box" id="ticketNoteBox" style="display: none;">
+              <span class="note-label">NOTE FROM SAIII:</span>
+              <p class="note-text" id="ticketNoteText"></p>
+            </div>
+          </div>
+
+          <div class="ticket-footer">
+            <div class="barcode">
+              <span>||| | ||||| || |||| |||| ||| |||| | |||</span>
+              <span class="ticket-serial">SAIII-DATE-2026-OCT</span>
+            </div>
+            <div class="ticket-stamp">
+              <span>OFFICIAL</span>
+              <span>DATE PASS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="final-actions">
+          <button type="button" class="btn btn-whatsapp btn-large" id="btnShareWhatsApp">
+            <span>💌 Send to Nandhini on WhatsApp (6374439661)</span>
+          </button>
+          <div class="auto-sent-hint">
+            <span>✨ Automatically opened WhatsApp with your choices! Tap above if it didn't open.</span>
+          </div>
+          <button type="button" class="btn btn-outline" id="btnAddToCalendar">
+            <span>📅 Save to Calendar (.ics)</span>
+          </button>
+          <button type="button" class="btn btn-link" id="btnStartOver">
+            <span>Change Details / Restart 🔄</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- POPUP MODAL 1: Oct 30 After 6pm Restriction -->
+  <div class="modal-overlay" id="homeCurfewModal" role="dialog" aria-modal="true" aria-labelledby="curfewTitle">
+    <div class="modal-card">
+      <div class="modal-emoji">🏃‍♀️🏡💨</div>
+      <h3 class="modal-title" id="curfewTitle">Sorry, I will go to my home! 🥺</h3>
+      <p class="modal-desc">
+        Saiii, on <strong>October 30th</strong>, I have to be back home by <strong>6:00 PM</strong>! 
+        I can't stay after 6 PM on that day.
+      </p>
+      <div class="modal-highlight-box">
+        💡 Please pick a time <strong>before 6:00 PM</strong> on Oct 30th, or choose <strong>Oct 28</strong> or <strong>Oct 29</strong> where we can hang out longer! 💕
+      </div>
+      <button type="button" class="btn btn-primary btn-full" id="btnCloseCurfewModal">
+        Okay, let me pick an earlier time! ⏰
+      </button>
+    </div>
+  </div>
+
+  <!-- POPUP MODAL 2: "No" Button Polite & Cute Response -->
+  <div class="modal-overlay" id="noResponseModal" role="dialog" aria-modal="true" aria-labelledby="noResponseTitle">
+    <div class="modal-card">
+      <div class="modal-emoji">🥺💔👉👈</div>
+      <h3 class="modal-title" id="noResponseTitle">No problem at all!</h3>
+      <p class="modal-desc">
+        No problem Saiii! 💕 I understand if you're busy or need some time. Whenever you're ready, I'm always happy to meet you!
+      </p>
+      <div class="modal-highlight-box">
+        (Psst... did you click No by mistake? You can still change your mind! 🙈)
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="btnChangeMindYes">
+          Just kidding! Let's meet! 🥰
+        </button>
+        <button type="button" class="btn btn-outline" id="btnCloseNoModal">
+          It's okay, see you soon! ❤️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas for Celebration -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
